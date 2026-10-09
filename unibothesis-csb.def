@@ -1,0 +1,23 @@
+\ProvidesFile{csb.def}[Thesis layout for graduation]
+
+\AtBeginDocument{%
+}
+
+\def\@csb@maketitlepage{
+  \newgeometry{margin=2cm}
+  \newlength{\@logosize}
+  \newlength{\@respectsize}
+  \setlength{\@logosize}{5cm}
+  \setlength{\@respectsize}{0.16\@logosize}
+  \begin{titlingpage}
+    \begin{minipage}[ht!]{\textwidth}
+      se ero al collegio...
+
+    \end{minipage}
+
+  \end{titlingpage}
+
+  \restoregeometry
+}
+
+\providecommand{\maketitlepage}{\@csb@maketitlepage}

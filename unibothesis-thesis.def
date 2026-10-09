@@ -1,0 +1,118 @@
+\ProvidesFile{unibothesis-thesis.def}[Thesis layout for graduation]
+
+\AtBeginDocument{
+  \iflanguage{italian}{%
+    \ifthenelse{\value{candidateno} > 1}
+      {\renewcommand{\@candidatename}{Candidati}}
+      {\renewcommand{\@candidatename}{Candidato}}
+    \ifthenelse{\value{supervisorno} > 1}
+      {\renewcommand{\@supervisorname}{Relatori}}
+      {\renewcommand{\@supervisorname}{Relatore}}
+    \ifthenelse{\value{cosupervisorno} > 1}
+      {\renewcommand{\@cosupervisorname}{Correlatori}}
+      {\renewcommand{\@cosupervisorname}{Correlatore}}
+    \ifthenelse{\value{examinerno} > 1}
+      {\renewcommand{\@examinername}{Controrelatori}}
+      {\renewcommand{\@examinername}{Controrelatore}}
+    \renewcommand{\@academicyearname}{Anno Accademico}
+    \renewcommand{\@honor}{Chiar.mo}
+  }{\relax}
+  \iflanguage{english}{%
+    \ifthenelse{\value{candidateno} > 1}
+      {\renewcommand{\@candidatename}{Candidates}}
+      {\renewcommand{\@candidatename}{Candidate}}
+    \ifthenelse{\value{supervisorno} > 1}
+      {\renewcommand{\@supervisorname}{Supervisors}}
+      {\renewcommand{\@supervisorname}{Supervisor}}
+    \ifthenelse{\value{cosupervisorno} > 1}
+      {\renewcommand{\@cosupervisorname}{Co-supervisors}}
+      {\renewcommand{\@cosupervisorname}{Co-supervisor}}
+    \ifthenelse{\value{examinerno} > 1}
+      {\renewcommand{\@examinername}{Examiners}}
+      {\renewcommand{\@examinername}{Examiner}}
+    \renewcommand{\@academicyearname}{Academic Year}
+    \renewcommand{\@honor}{\qquad}
+  }{\relax}
+}
+
+\def\@thesis@maketitlepage{%
+  \newgeometry{margin=2cm}
+  \newlength{\@logosize}
+  \newlength{\@respectsize}
+  \setlength{\@logosize}{5cm}
+  \setlength{\@respectsize}{0.16\@logosize}
+
+  \begin{titlingpage}
+    \begin{center}
+      \begin{minipage}[t]{\linewidth} % top of the page
+        \centering
+        \begin{minipage}[t]{\@logosize}
+          \centering
+          \includegraphics[width=\linewidth]{assets/images/dummy-logo.jpg}
+        \end{minipage}
+        \par\vspace{\@respectsize}
+        \large
+        {\bfseries\scshape\@department}
+        \par\vspace{0.1\@respectsize}
+        {\bfseries\scshape\@degree}
+        \par\vspace{0.5\@respectsize}
+        \hrule
+      \end{minipage}
+
+      \vspace{\fill}
+      \vspace{\fill}
+      {\scshape\Large\@title\par}
+      \vspace{\fill}
+      \begin{minipage}{\@logosize}
+        \centering
+        \hrule
+        \vspace{0.5\@respectsize}
+        \@flavourtext
+        \vspace{0.5\@respectsize}
+        \hrule
+      \end{minipage}
+      \vspace{\fill}
+
+      \begin{minipage}{\linewidth}
+        \begin{minipage}[t]{0.45\textwidth}
+          \begin{tabbing}
+            \@honor\ \= Prof. P. Pallino \kill
+            \ifnum\value{supervisorno}>0
+              {\bfseries\scshape\@supervisorname:} \> \\
+              \@supervisors
+            \fi
+            \ifnum\value{cosupervisorno}>0
+                \medskip\\ % Spazio tra blocchi
+                {\bfseries\scshape\@cosupervisorname:} \> \\
+                \@cosupervisors
+            \fi
+            \ifnum\value{examinerno}>0
+                \medskip\\
+                {\bfseries\scshape\@examinername:} \> \\
+                \@examiners
+            \fi
+          \end{tabbing}
+        \end{minipage}
+        \hfill
+        \begin{minipage}[t]{0.45\textwidth}
+          \begin{tabbing}
+            \@honor \= Prof. P. Pallino \kill
+              {\bfseries\scshape\@candidatename:} \> \\
+              \@candidates
+          \end{tabbing}
+        \end{minipage}
+      \end{minipage}
+      \vspace{\fill}
+
+      \begin{minipage}[hb!]{\linewidth}
+        \centering
+        \hrule
+        \vspace{0.5\@respectsize}
+        {\scshape\bfseries \@academicyearname\ \@academicyear}
+      \end{minipage}
+    \end{center}
+  \end{titlingpage}
+  \restoregeometry
+}
+
+\providecommand{\maketitlepage}{\@thesis@maketitlepage}
